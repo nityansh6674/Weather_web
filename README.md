@@ -61,7 +61,7 @@ Weather-App/
 Clone the repository
 
 ```bash
-git clone https://github.com/your-username/weather-app.git
+git clone https://github.com/nityansh6674/weather-app.git
 ```
 
 Navigate to the project
@@ -126,7 +126,6 @@ https://openweathermap.org/api
 **Nityansh Maurya**
 
 - GitHub: https://github.com/your-github-username
-- LinkedIn: https://linkedin.com/in/your-linkedin-profile
 
 ---
 
