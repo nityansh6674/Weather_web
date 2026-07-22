@@ -13,9 +13,9 @@ import {
 const OneDay = ({ weather, forecast }) => {
   if (!weather) {
     return (
-      <div className="w-1/2 mt-3 p-2">
-        <div className="bg-white rounded-3xl shadow-xl h-[68vh] flex items-center justify-center">
-          <h2 className="text-2xl font-semibold text-gray-500">
+      <div className="w-full lg:w-1/2">
+        <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl min-h-[65vh] flex items-center justify-center shadow-2xl">
+          <h2 className="text-2xl text-white font-semibold text-center px-6">
             🔍 Search a city to view weather
           </h2>
         </div>
@@ -38,14 +38,17 @@ const OneDay = ({ weather, forecast }) => {
     : 0;
 
   return (
-    <div className="w-1/2 mt-3 p-2">
-      <div className="bg-white rounded-3xl shadow-xl p-5 h-[68vh] overflow-y-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center">
-          <div>
-            <h2 className="text-3xl font-bold">📍 {weather.name}</h2>
+    <div className="w-full lg:w-1/2">
+      <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl min-h-[65vh] lg:h-[68vh] overflow-y-auto">
 
-            <p className="text-gray-500 mt-1">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-5">
+
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl font-bold text-white">
+              📍 {weather.name}
+            </h2>
+
+            <p className="text-white/80 mt-2">
               {new Date().toLocaleString("en-IN", {
                 weekday: "long",
                 day: "numeric",
@@ -60,110 +63,95 @@ const OneDay = ({ weather, forecast }) => {
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
               alt={weather.weather[0].description}
-              className="w-20 h-20"
+              className="w-28 h-28 drop-shadow-xl"
             />
 
-            <p className="capitalize font-semibold">
+            <p className="capitalize text-white font-semibold">
               {weather.weather[0].description}
             </p>
           </div>
         </div>
 
-        {/* Temperature */}
-
-        <div className="mt-5 text-center">
-          <h1 className="text-6xl font-bold">
-            {Math.round(weather.main.temp)}°C
+        <div className="text-center mt-6">
+          <h1 className="text-6xl font-black text-white">
+            {Math.round(weather.main.temp)}°
           </h1>
 
-          <h3 className="text-2xl font-semibold mt-2">
+          <p className="text-2xl font-semibold text-white mt-2">
             {weather.weather[0].main}
-          </h3>
+          </p>
 
-          <p className="text-gray-500">
+          <p className="text-white/80">
             Feels Like {Math.round(weather.main.feels_like)}°C
           </p>
         </div>
 
-        {/* Details */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
 
-        <div className="grid grid-cols-2 gap-3 mt-6">
-          <div className="col-span-2 flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
+          <div className="sm:col-span-2 bg-white/15 rounded-2xl p-4 flex justify-between items-center">
+            <div className="flex gap-2 items-center text-white">
               <PersonStanding size={18} />
-              <span>Population</span>
+              Population
             </div>
-            
-            <span className="font-semibold">
+
+            <span className="text-white font-bold">
               {forecast?.city?.population
                 ? forecast.city.population.toLocaleString()
                 : "N/A"}
             </span>
           </div>
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Droplets size={18} />
-              <span>Humidity</span>
+
+          {[
+            {
+              icon: <Droplets size={18} />,
+              label: "Humidity",
+              value: `${weather.main.humidity}%`,
+            },
+            {
+              icon: <Wind size={18} />,
+              label: "Wind",
+              value: `${weather.wind.speed} m/s`,
+            },
+            {
+              icon: <Thermometer size={18} />,
+              label: "Feels Like",
+              value: `${Math.round(weather.main.feels_like)}°C`,
+            },
+            {
+              icon: <Gauge size={18} />,
+              label: "Pressure",
+              value: `${weather.main.pressure} hPa`,
+            },
+            {
+              icon: <CloudRain size={18} />,
+              label: "Rain",
+              value: `${chanceOfRain}%`,
+            },
+            {
+              icon: <Sunrise size={18} />,
+              label: "Sunrise",
+              value: sunrise,
+            },
+            {
+              icon: <Sunset size={18} />,
+              label: "Sunset",
+              value: sunset,
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${
+                item.label === "Sunset" ? "sm:col-span-2" : ""
+              } bg-white/15 rounded-2xl p-4 flex justify-between items-center`}
+            >
+              <div className="flex gap-2 items-center text-white">
+                {item.icon}
+                {item.label}
+              </div>
+
+              <span className="text-white font-bold">{item.value}</span>
             </div>
-
-            <span className="font-semibold">{weather.main.humidity}%</span>
-          </div>
-
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Wind size={18} />
-              <span>Wind</span>
-            </div>
-
-            <span className="font-semibold">{weather.wind.speed} m/s</span>
-          </div>
-
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Thermometer size={18} />
-              <span>Feels Like</span>
-            </div>
-
-            <span className="font-semibold">
-              {Math.round(weather.main.feels_like)}°C
-            </span>
-          </div>
-
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Gauge size={18} />
-              <span>Pressure</span>
-            </div>
-
-            <span className="font-semibold">{weather.main.pressure} hPa</span>
-          </div>
-
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <CloudRain size={18} />
-              <span>Chance of Rain</span>
-            </div>
-
-            <span className="font-semibold">{chanceOfRain}%</span>
-          </div>
-
-          <div className="flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Sunrise size={18} />
-              <span>Sunrise</span>
-            </div>
-
-            <span className="font-semibold">{sunrise}</span>
-          </div>
-
-          <div className="col-span-2 flex justify-between items-center bg-gray-100 rounded-xl p-3">
-            <div className="flex items-center gap-2">
-              <Sunset size={18} />
-              <span>Sunset</span>
-            </div>
-
-            <span className="font-semibold">{sunset}</span>
-          </div>
+          ))}
         </div>
       </div>
     </div>

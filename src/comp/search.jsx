@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Search as SearchIcon } from "lucide-react";
 
-const Search = ({ onSearch }) => { 
-   const [city, setCity] = useState("");
+const Search = ({ onSearch }) => {
+  const [city, setCity] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -12,29 +12,29 @@ const Search = ({ onSearch }) => {
       return;
     }
 
-onSearch(city);
+    onSearch(city);
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-8">
       <form
         onSubmit={handleSearch}
-        className="flex justify-between gap-4"
+        className="flex flex-col md:flex-row items-center gap-4"
       >
         <input
           type="text"
-          placeholder="Enter city name"
+          placeholder="🔍 Search any city..."
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="flex-1 text-white rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500"
+          className="w-full flex-1 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-lg px-5 py-4 text-lg text-white placeholder:text-white/70 outline-none transition-all duration-300 focus:border-white focus:bg-white/30"
         />
 
         <button
           type="submit"
-          className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-white transition hover:bg-blue-700 active:scale-95"
+          className="w-full md:w-auto flex items-center justify-center gap-2 rounded-2xl bg-cyan-500 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-cyan-600 hover:scale-105 active:scale-95"
         >
-          <SearchIcon size={20} />
-          <span>Search</span>
+          <SearchIcon size={22} />
+          Search
         </button>
       </form>
     </div>
