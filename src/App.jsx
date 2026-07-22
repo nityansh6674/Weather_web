@@ -1,6 +1,6 @@
 import { useState } from "react";
 import OneDay from "./comp/one_day";
-import SevenDay from "./comp/7_day";
+import SevenDay from "./comp/5_day";
 import Search from "./comp/search";
 import { getforecast, getWeather } from "./services/weatherApi";
 

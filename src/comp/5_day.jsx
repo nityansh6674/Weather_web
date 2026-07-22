@@ -21,7 +21,7 @@ const SevenDay = ({ forecast }) => {
     <div className="w-full lg:w-1/2">
       <div className="bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl min-h-[65vh] lg:h-[68vh] overflow-y-auto">
         <h1 className="text-3xl font-bold text-white text-center mb-6">
-          7 Day Forecast
+          5 Day Forecast
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
