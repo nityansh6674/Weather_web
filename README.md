@@ -12,10 +12,10 @@ A responsive Weather Forecast application built with **React.js**, **Vite**, and
 
 ## 📸 Preview
 
-> Add a screenshot of your application here.
+
+![Desktop View](src/assets/Screenshot%202026-07-22%20233924.png)
 
 ---
-
 ## ✨ Features
 
 - 🌍 Search weather by city name
